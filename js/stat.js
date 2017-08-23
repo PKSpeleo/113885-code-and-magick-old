@@ -29,7 +29,7 @@ window.renderStatistics = function (ctx, names, times) {
   var histogramInitialY = 100;
   var histogramMyColumnName = 'Вы';
   var histogramMyColumnColour = 'rgba(255, 0, 0, 1.0)';
-  var histogramTetxUpSffset = 10;
+  var histogramTetxUpOffset = 10;
 
 
   // Функция рисования окна статистики
@@ -60,21 +60,21 @@ window.renderStatistics = function (ctx, names, times) {
 
   // Вычислем пропорцию для гисторгамм
   var historamStep = histogramHeight / maxOfTimes;
-  // Функция рисования
-  var drawStatColumnWithText = function (namesArry, timesArry, xStartDraw, yStartDraw, step, columnWidth, columnSpace) {
-    for (var i = 0; i < timesArry.length; i++) {
+  // Функция рисования гистограмм
+  var drawStatColumnWithText = function (namesArr, timesArr, xStartDraw, yStartDraw, step, columnWidth, columnSpace) {
+    for (var i = 0; i < timesArr.length; i++) {
       var x = xStartDraw + (columnWidth + columnSpace) * i;
-      var y = yStartDraw - timesArry[i] * step;
-      var height = timesArry[i] * step;
+      var y = yStartDraw - timesArr[i] * step;
+      var height = timesArr[i] * step;
       var width = columnWidth;
-      var randomDigit1til02 = (Math.random() * (1 - 0.2) + 0.2);
-      var histogramColumnColour = 'rgba(0, 0, 255, ' + randomDigit1til02 + ')';
-      ctx.fillStyle = (namesArry[i] === histogramMyColumnName) ? histogramMyColumnColour : histogramColumnColour;
+      var randomDigitFrom1to02 = (Math.random() * (1 - 0.2) + 0.2);
+      var histogramColumnColour = 'rgba(0, 0, 255, ' + randomDigitFrom1to02 + ')';
+      ctx.fillStyle = (namesArr[i] === histogramMyColumnName) ? histogramMyColumnColour : histogramColumnColour;
       ctx.fillRect(x, y, width, height);
       ctx.fillStyle = cloudTextColour;
       ctx.font = cloudTextStyle;
-      ctx.fillText(namesArry[i], x, yStartDraw + cloudTextHeightInPX);
-      ctx.fillText(Math.round(timesArry[i]), x, y - histogramTetxUpSffset);
+      ctx.fillText(namesArr[i], x, yStartDraw + cloudTextHeightInPX);
+      ctx.fillText(Math.round(timesArr[i]), x, y - histogramTetxUpOffset);
     }
   };
   drawStatColumnWithText(names, times, histogramInitialX, histogramInitialY + histogramHeight, historamStep, histogramColumnWidth, histogramColumnSpace);
