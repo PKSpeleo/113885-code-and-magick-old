@@ -29,7 +29,6 @@ window.renderStatistics = function (ctx, names, times) {
   var histogramInitialY = 100;
   var histogramMyColumnName = 'Вы';
   var histogramMyColumnColour = 'rgba(255, 0, 0, 1.0)';
-  var histogramColumnColourPart = 'rgba(0, 0, 255, ';
   var histogramTetxUpSffset = 10;
 
 
@@ -68,7 +67,8 @@ window.renderStatistics = function (ctx, names, times) {
       var y = yStartDraw - timesArry[i] * step;
       var height = timesArry[i] * step;
       var width = columnWidth;
-      var histogramColumnColour = histogramColumnColourPart + (Math.random() * (1 - 0.2) + 0.2) + ')';
+      var randomDigit1til02 = (Math.random() * (1 - 0.2) + 0.2);
+      var histogramColumnColour = 'rgba(0, 0, 255, ' + randomDigit1til02 + ')';
       ctx.fillStyle = (namesArry[i] === histogramMyColumnName) ? histogramMyColumnColour : histogramColumnColour;
       ctx.fillRect(x, y, width, height);
       ctx.fillStyle = cloudTextColour;
