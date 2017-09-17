@@ -103,4 +103,4 @@ setupOpen.addEventListener('click', clickOpenSetupHandler);
 // добавляем обработчик собития на клик ЗАКРЫТЬ
 setupClose.addEventListener('click', clickCloseSetupHandler);
 
-// Поехали 1
+// Поехали 2
