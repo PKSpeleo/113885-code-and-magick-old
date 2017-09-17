@@ -1,6 +1,9 @@
 // setup.js
 'use strict';
 
+// Пара констант
+var ESC_KEYCODE = 27;
+
 // Данные для генерации магов
 var WIZARD_FIRST_NAME = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var WIZARD_SECOND_NAME = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -14,11 +17,13 @@ var wizardsQuantity = 4;
 var wizards = [];
 
 // Открывем окно настроек
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+// setup.classList.remove('hidden');
 
 // Пара переменных для счастья
-var similarListElement = userDialog.querySelector('.setup-similar-list');
+var similarListElement = setup.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
 // Функция выбора случайных элеменов массива
@@ -64,6 +69,38 @@ for (var i = 0; i < wizards.length; i++) {
 }
 similarListElement.appendChild(fragment);
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+setup.querySelector('.setup-similar').classList.remove('hidden');
+
+// ====================================================
+// Занимаемся открытем-закрытием
+
+// функция удаления и добавления класса закрыть
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', pressEscPopupHandler);
+};
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', pressEscPopupHandler);
+};
+
+// функции обработчики события
+var clickOpenSetupHandler = function () {
+  openPopup();
+};
+var clickCloseSetupHandler = function () {
+  closePopup();
+};
+var pressEscPopupHandler = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+// добавляем обработчик события на клик открыть
+setupOpen.addEventListener('click', clickOpenSetupHandler);
+
+// добавляем обработчик собития на клик ЗАКРЫТЬ
+setupClose.addEventListener('click', clickCloseSetupHandler);
 
 
